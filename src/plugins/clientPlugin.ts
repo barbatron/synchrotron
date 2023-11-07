@@ -7,12 +7,10 @@ export const clientPlugin = new Elysia({ name: "clientPlugin" }).derive(
   ({ cookie: { client_id } }) => {
     if (client_id.value) {
       const clientId = client_id.value;
-      logger.info({ clientId }, "Already had client id");
-      return { clientId: client_id.value };
+      return { clientId };
     }
 
     const clientId = crypto.randomUUID();
-    logger.info({ clientId }, "assigning new client id");
     client_id.value = clientId;
 
     return { clientId };
