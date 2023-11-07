@@ -5,7 +5,7 @@ export const getAuthorizeUrlForScopes = (
   clientId: string,
   scopes: string | string[],
   returnUrl?: string
-): { url: URL; state: string } => {
+): { url: string; state: string } => {
   const url = new URL("https://accounts.spotify.com/authorize");
   const state = createState(clientId, returnUrl);
   const params = {
@@ -18,5 +18,5 @@ export const getAuthorizeUrlForScopes = (
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.set(key, value)
   );
-  return { state, url };
+  return { state, url: url.toString() };
 };
