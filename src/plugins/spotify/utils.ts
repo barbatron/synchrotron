@@ -1,9 +1,13 @@
-import { SpotifyApi } from "@spotify/web-api-ts-sdk";
-import { spotify as spotifyConfig } from "../config";
+import { spotify as spotifyConfig } from "../../config";
+import { createState } from "./stateSessions";
 
-export const authorizeUrlForScopes = (scopes: string | string[]): URL => {
+export const getAuthorizeUrlForScopes = (
+  clientId: string,
+  scopes: string | string[],
+  returnUrl?: string
+): { url: URL; state: string } => {
   const url = new URL("https://accounts.spotify.com/authorize");
-  const state = crypto.randomUUID();
+  const state = createState(clientId, returnUrl);
   const params = {
     response_type: "code",
     client_id: spotifyConfig.clientId,
@@ -14,9 +18,5 @@ export const authorizeUrlForScopes = (scopes: string | string[]): URL => {
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.set(key, value)
   );
-  return url;
-};
-
-export const sdkFromRedirect = (data: unknown) => {
-  // SpotifyApi.withAccessToken("client-id", data);
+  return { state, url };
 };

@@ -7,4 +7,5 @@ export const spotify = {
 
 export const server = {
   port: process.env.PORT || 3000,
+  isProduction: "production" === process.env.NODE_ENV?.toLowerCase(),
 };

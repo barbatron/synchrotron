@@ -8,9 +8,12 @@
   "dependencies": {
     "@spotify/web-api-ts-sdk": "^1.1.2",
     "elysia": "latest",
-    "elysia-autoroutes": "^0.4.0"
+    "elysia-autoroutes": "^0.4.0",
+    "pino": "^8.16.1",
+    "pino-pretty": "^10.2.3"
   },
   "devDependencies": {
+    "@types/pino": "^7.0.5",
     "bun-types": "latest"
   },
   "module": "src/index.js"
